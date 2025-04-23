@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APPSTORE</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .app-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .app-item {
+      background: #222;
+      border-radius: 10px;
+      padding: 1rem;
+      color: #fff;
+    }
+    .admin-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: purple;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <button class="admin-btn" onclick="window.location.href='admin.html'">Admin</button>
+  <div class="container">
+    <h1>APPSTORE</h1>
+    <p>Escolha um aplicativo para baixar:</p>
+    <div class="app-list" id="appList">
+      <!-- Apps serão carregados dinamicamente aqui -->
+    </div>
+  </div>  <script>
+    const apps = JSON.parse(localStorage.getItem('apps') || '[]');
+
+    const appListEl = document.getElementById('appList');
+
+    if (apps.length === 0) {
+      appListEl.innerHTML = '<p>Nenhum aplicativo disponível.</p>';
+    } else {
+      apps.forEach(app => {
+        const el = document.createElement('div');
+        el.className = 'app-item';
+        el.innerHTML = `<strong>${app.name}</strong><br><a href="${app.link}" target="_blank">Baixar</a>`;
+        appListEl.appendChild(el);
+      });
+    }
+  </script></body>
+</html>
